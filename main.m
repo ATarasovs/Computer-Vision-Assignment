@@ -15,7 +15,7 @@ tilesNum = input('Please input the number of tiles: ','s');
 tileSize = getTileSize(targetImage, tilesNum);
 
 %% Set size for each source image
-resizedSourceImages = resizeSourceImages(sourceImages);
-
+resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
+imshow(resizedSourceImages{1});
 %% Get RGB means for each source image 
 meanSource = getMeanSource(resizedSourceImages);
