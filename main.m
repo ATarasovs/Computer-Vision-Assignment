@@ -7,6 +7,8 @@ directory = 'Images/test';
 fileType = 'jpg';
 sourceImages = getSourceImages(directory, fileType);
 
-%% Get RGB means for each tile 
-meanSource = getMeanSource(sourceImages);
-% meansSource
+%% Set size for each source image
+resizedSourceImages = resizeSourceImages(sourceImages);
+
+%% Get RGB means for each source image 
+meanSource = getMeanSource(resizedSourceImages);
