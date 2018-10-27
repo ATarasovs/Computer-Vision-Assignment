@@ -14,8 +14,18 @@ targetImage = imread('Images/mosaic_target2.jpg');
 tilesNum = input('Please input the number of tiles: ','s');
 tileSize = getTileSize(targetImage, tilesNum);
 
+%% Get tiles across and down the image
+[tilesAcross, tilesDown] = getTileDimensions(targetImage, tilesNum, tileSize);
+
+%% Apply grid on target image and get grid cells
+targetGridCells = getGridCells(targetImage, tileSize, tilesAcross, tilesDown);
+
 %% Set size for each source image
 resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
-imshow(resizedSourceImages{1});
+
 %% Get RGB means for each source image 
 meanSource = getMeanSource(resizedSourceImages);
+
+
+%% 
+disp("Executed!!!");
