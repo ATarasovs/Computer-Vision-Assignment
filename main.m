@@ -20,6 +20,8 @@ tileSize = getTileSize(targetImage, tilesNum);
 %% Apply grid on target image and get grid cells
 targetGridCells = getGridCells(targetImage, tileSize, tilesAcross, tilesDown);
 
+%% Get mean RGB for each grid cell
+targetCellsMeans = getMeanTargetCells(targetGridCells);
 
 %% Set size for each source image
 resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
@@ -27,6 +29,5 @@ resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
 %% Get RGB means for each source image 
 meanSource = getMeanSource(resizedSourceImages);
 
-
-%% 
+%% Executed
 disp("Executed!!!");

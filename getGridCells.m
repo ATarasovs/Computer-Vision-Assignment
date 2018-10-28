@@ -1,7 +1,6 @@
 % Needs imrovement as, for example, if we specify the number of tiles - 30,
 % it will be 6 x 4 = 24
 function[gridCells] = getGridCells(I, tileSize, across, down)
-    imshow(I);
     for k=1:down
         for j=1:across
             row = round((1+(k-1)*tileSize):(k*tileSize));
