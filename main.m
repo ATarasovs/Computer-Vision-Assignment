@@ -20,6 +20,7 @@ tileSize = getTileSize(targetImage, tilesNum);
 %% Apply grid on target image and get grid cells
 targetGridCells = getGridCells(targetImage, tileSize, tilesAcross, tilesDown);
 
+
 %% Set size for each source image
 resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
 
