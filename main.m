@@ -4,7 +4,7 @@ clear all
 
 %% Collect the list of source images
 % directory = input('Please enter the folder with source images: ','s');
-directory = 'Images/test';
+directory = 'Images/manmade_training';
 % fileType = input('Please provide the file type of images (jpg, png, etc.): ','s');
 fileType = 'jpg';
 sourceImages = getSourceImages(directory, fileType);
@@ -30,9 +30,10 @@ resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
 meanSource = getMeanSource(resizedSourceImages);
 
 %% Compare each target cell with the set of source images and find the most suitable tile
-[minRGBDifference, selectedSourceImg] = compareTargetWithSource(meanTargetCells, meanSource);
-minRGBDifference
-selectedSourceImg
+[minRGBDifference, selectedSourceImages] = compareTargetWithSource(meanTargetCells, meanSource);
+
+%% Generate mosaic
+mosiacImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
 
 %% Executed
 disp("Executed!!!");
