@@ -21,13 +21,18 @@ tileSize = getTileSize(targetImage, tilesNum);
 targetGridCells = getGridCells(targetImage, tileSize, tilesAcross, tilesDown);
 
 %% Get mean RGB for each grid cell
-targetCellsMeans = getMeanTargetCells(targetGridCells);
+meanTargetCells = getMeanTargetCells(targetGridCells);
 
 %% Set size for each source image
 resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
 
 %% Get RGB means for each source image 
 meanSource = getMeanSource(resizedSourceImages);
+
+%% Compare each target cell with the set of source images and find the most suitable tile
+[minRGBDifference, selectedSourceImg] = compareTargetWithSource(meanTargetCells, meanSource);
+minRGBDifference
+selectedSourceImg
 
 %% Executed
 disp("Executed!!!");
