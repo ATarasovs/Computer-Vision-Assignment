@@ -3,14 +3,20 @@ clc
 clear all
 
 %% Collect the list of source images
-% directory = input('Please enter the folder with source images: ','s');
-directory = 'Images/manmade_training';
-% fileType = input('Please provide the file type of images (jpg, png, etc.): ','s');
-fileType = 'jpg';
+directory = input('Please enter the folder with source images: ','s');
+% directory = 'Images/test';
+fileType = input('Please provide the file type of images (Images/test, png, etc.): ','s');
+% fileType = 'jpg';
 sourceImages = getSourceImages(directory, fileType);
 
+%% Resize the target image
+targetImage = imread(input('Please enter the target image: ','s'));
+targetImageWidth = input('Please enter the width of the target image: ','s');
+targetImageHeight = input('Please enter the height of the target image: ','s');
+targetImage = resizeTargetImage(targetImage, targetImageWidth, targetImageHeight);
+% targetImage = imread('Images/mosaic_target2.jpg');
+
 %% Get tile size based on the number of tile provided by a user
-targetImage = imread('Images/mosaic_target2.jpg');
 tilesNum = input('Please input the number of tiles: ','s');
 tileSize = getTileSize(targetImage, tilesNum);
 
@@ -33,7 +39,10 @@ meanSource = getMeanSource(resizedSourceImages);
 [minRGBDifference, selectedSourceImages] = compareTargetWithSource(meanTargetCells, meanSource);
 
 %% Generate mosaic
-mosiacImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
+mosaicImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
+resultImagePath = input('Please input the path where you would like to save mosaic image: ','s');
+% imwrite(mosaicImage,'Images/result.jpg');
+imwrite(mosaicImage, resultImagePath);
 
 %% Executed
 disp("Executed!!!");
