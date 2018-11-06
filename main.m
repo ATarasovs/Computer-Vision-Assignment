@@ -2,22 +2,26 @@
 clc
 clear all
 
+%% Get user inputs
+directory = input('Please enter the folder with source images: ','s'); 
+% Images/test
+fileType = input('Please provide the file type of images (jpg, png, etc.): ','s'); 
+%jpg
+targetImage = imread(input('Please enter the target image: ','s')); 
+% Images/mosaic_target2.jpg
+targetImageWidth = input('Please enter the width of the target image: ','s');
+targetImageHeight = input('Please enter the height of the target image: ','s');
+tilesNum = input('Please input the number of tiles: ','s');
+resultImagePath = input('Please input the path where you would like to save mosaic image: ','s');
+%Images/result.jpg
+
 %% Collect the list of source images
-directory = input('Please enter the folder with source images: ','s');
-% directory = 'Images/test';
-fileType = input('Please provide the file type of images (Images/test, png, etc.): ','s');
-% fileType = 'jpg';
 sourceImages = getSourceImages(directory, fileType);
 
 %% Resize the target image
-targetImage = imread(input('Please enter the target image: ','s'));
-targetImageWidth = input('Please enter the width of the target image: ','s');
-targetImageHeight = input('Please enter the height of the target image: ','s');
 targetImage = resizeTargetImage(targetImage, targetImageWidth, targetImageHeight);
-% targetImage = imread('Images/mosaic_target2.jpg');
 
 %% Get tile size based on the number of tile provided by a user
-tilesNum = input('Please input the number of tiles: ','s');
 tileSize = getTileSize(targetImage, tilesNum);
 
 %% Get tiles across and down the image
@@ -40,8 +44,6 @@ meanSource = getMeanSource(resizedSourceImages);
 
 %% Generate mosaic
 mosaicImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
-resultImagePath = input('Please input the path where you would like to save mosaic image: ','s');
-% imwrite(mosaicImage,'Images/result.jpg');
 imwrite(mosaicImage, resultImagePath);
 
 %% Executed
