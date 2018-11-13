@@ -8,6 +8,4 @@ function[newImage] = createMosaicImage(resizedSourceImages, selectedSourceImages
     end
     
     newImage = cell2mat(newImage);
-    imshow(newImage)
-    
 end
