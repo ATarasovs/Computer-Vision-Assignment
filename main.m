@@ -1,7 +1,7 @@
-function[] = main(directory, fileType, targetImage, targetImageWidth, targetImageHeight, tilesNum, resultImagePath)
+function[] = main(directory, targetImage, targetImageWidth, targetImageHeight, tilesNum, resultImagePath)
     
     %% Collect the list of source images
-    sourceImages = getSourceImages(directory, fileType);
+    sourceImages = getSourceImages(directory, 'jpg');
     
     %% Resize the target image
     targetImage = resizeTargetImage(targetImage, targetImageWidth, targetImageHeight);
