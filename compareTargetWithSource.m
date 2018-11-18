@@ -11,7 +11,7 @@ function[minRGBDifference, selectedSourceImg] = compareTargetWithSource(targetMe
             meanGreenTarget = targetMeans(k,j,2);
             meanBlueTarget = targetMeans(k,j,3);
             
-            for n=1:sourceHeight
+            for n=1:sourceHeight % for each source image
                 meanRedSource = sourceMeans(n,1);
                 meanGreenSource = sourceMeans(n,2);
                 meanBlueSource = sourceMeans(n,3);
@@ -23,7 +23,12 @@ function[minRGBDifference, selectedSourceImg] = compareTargetWithSource(targetMe
                 meanRGBDifference(n) = meanRedDifference + meanGreenDifference + meanBlueDifference;
             end
             
-            [minRGBDifference(k,j), selectedSourceImg(k,j)] = min(meanRGBDifference);
+            minRGBDifferences = mink(meanRGBDifference,5);
+            randomSourceImageDifference = randsample(minRGBDifferences, 1);
+            sourceImageIndex = find(meanRGBDifference==randomSourceImageDifference);
+            
+            minRGBDifference(k,j) = randomSourceImageDifference;
+            selectedSourceImg(k,j) = sourceImageIndex(1);
         end
     end
 end
