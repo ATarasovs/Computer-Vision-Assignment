@@ -35,7 +35,10 @@ function[] = main(targetImage, targetImagePath, targetImageWidth, targetImageHei
     
     % Generate mosaic
     mosaicImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
-    imwrite(mosaicImage, resultImagePath);
+    
+    mosaicImageInc = increaseIntensity(mosaicImage);
+   
+    imwrite(mosaicImageInc, resultImagePath);
 
     % Executed
     disp("Executed!!!");
