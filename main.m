@@ -1,20 +1,26 @@
-function[] = main(directory, targetImage, targetImageWidth, targetImageHeight, tilesNum, resultImagePath)
-
+function[] = main(targetImage, targetImagePath, targetImageWidth, targetImageHeight, tilesNum, resultImagePath)
+    
+    disp("Started...");
+    
+    directory = getImageClass(targetImagePath);
+    
     % Collect the list of source images
     sourceImages = getSourceImages(directory, 'jpg');
+    disp("Source images collected...");
     
     % Resize the target image
     targetImage = resizeTargetImage(targetImage, targetImageWidth, targetImageHeight);
+    disp("Target image resized...");
     
     % Get tile size based on the number of tile provided by a user
     tileSize = getTileSize(targetImage, tilesNum);
-    
     % Get tiles across and down the image
     [tilesAcross, tilesDown] = getTileDimensions(targetImage, tilesNum, tileSize);
     
     % Apply grid on target image and get grid cells
     targetGridCells = getGridCells(targetImage, tileSize, tilesAcross, tilesDown);
-    
+    disp("Grid applied to the target image...");
+   
     % Get mean RGB for each grid cell
     meanTargetCells = getMeanTargetCells(targetGridCells);
     
