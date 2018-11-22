@@ -10,6 +10,7 @@ function[redMean, greenMean, blueMean] = getMeanRGB(I)
             blueMean = blueMean + double(I(k,j,3));
         end
     end
+    
     redMean = round(redMean/imgArea);
     greenMean = round(greenMean/imgArea);
     blueMean = round(blueMean/imgArea);

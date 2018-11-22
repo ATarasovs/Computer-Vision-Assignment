@@ -1,6 +1,5 @@
 % This function selects the most suitable suitable siource image for each
-% grid cell. //Improvements: do not allow to select each image more than
-% once.
+% grid cell.
 function[minRGBDifference, selectedSourceImg] = compareTargetWithSource(targetMeans, sourceMeans)
     [targetHeight, targetWidth, targetDim] = size(targetMeans);
     [sourceHeight, sourceWidth, sourceDim] = size(sourceMeans);
@@ -16,6 +15,10 @@ function[minRGBDifference, selectedSourceImg] = compareTargetWithSource(targetMe
                 meanGreenSource = sourceMeans(n,2);
                 meanBlueSource = sourceMeans(n,3);
                 
+%                 meanRGBDifference(n) = sqrt((meanRedTarget - meanRedSource)^2 + ... 
+%                     (meanGreenTarget - meanGreenSource)^2 + ...
+%                     (meanBlueTarget - meanBlueSource)^2);
+                
                 meanRedDifference = abs(meanRedTarget - meanRedSource);
                 meanGreenDifference = abs(meanGreenTarget - meanGreenSource);
                 meanBlueDifference = abs(meanBlueTarget - meanBlueSource);
@@ -23,7 +26,17 @@ function[minRGBDifference, selectedSourceImg] = compareTargetWithSource(targetMe
                 meanRGBDifference(n) = meanRedDifference + meanGreenDifference + meanBlueDifference;
             end
             
-            [minRGBDifference(k,j), selectedSourceImg(k,j)] = min(meanRGBDifference);
+            % Random
+            minRGBDifferences = mink(meanRGBDifference,5);
+            randomSourceImageDifference = randsample(minRGBDifferences, 1);
+            sourceImageIndex = find(meanRGBDifference==randomSourceImageDifference);
+            
+            minRGBDifference(k,j) = randomSourceImageDifference;
+            selectedSourceImg(k,j) = sourceImageIndex(1);
+
+            % Minimum difference
+%             [minRGBDifference(k,j), selectedSourceImg(k,j)] = min(meanRGBDifference);
+   
         end
     end
 end

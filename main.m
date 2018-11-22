@@ -1,5 +1,5 @@
 function[] = main(targetImage, targetImagePath, targetImageWidth, targetImageHeight, tilesNum, resultImagePath)
-    
+
     disp("Started...");
     
     directory = getImageClass(targetImagePath);
@@ -26,7 +26,7 @@ function[] = main(targetImage, targetImagePath, targetImageWidth, targetImageHei
     
     % Set size for each source image
     resizedSourceImages = resizeSourceImages(sourceImages, tileSize);
-    
+        
     % Get RGB means for each source image 
     meanSource = getMeanSource(resizedSourceImages);
     
@@ -36,9 +36,10 @@ function[] = main(targetImage, targetImagePath, targetImageWidth, targetImageHei
     % Generate mosaic
     mosaicImage = createMosaicImage(resizedSourceImages, selectedSourceImages);
     
+    % Increase RGB colour saturation
     mosaicImageInc = increaseIntensity(mosaicImage);
    
-    imwrite(mosaicImageInc, resultImagePath);
+    % Write the image to the result file
+    imwrite(mosaicImage, resultImagePath);
 
-    % Executed
     disp("Executed!!!");
